@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Paris Events</title>
+
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
 
-    <h1>Paris Events</h1>
+<header>
+    <div class="container">
+        <h1>Paris Events</h1>
+        <p>Trouvez facilement des événements culturels et ludiques à Paris.</p>
+    </div>
+</header>
 
-    <form method="GET" action="{{ route('events.index') }}">
+<main class="container">
+
+    <form
+        method="GET"
+        action="{{ route('events.index') }}"
+        class="filters"
+    >
 
         <input
             type="text"
@@ -26,70 +40,77 @@
             </option>
 
             @foreach ($categories as $category)
-
                 <option
                     value="{{ $category }}"
                     @selected(request('category') === $category)
                 >
                     {{ $category }}
                 </option>
-
             @endforeach
 
         </select>
 
-        <button type="submit">
+        <button type="submit" class="btn">
             Rechercher
         </button>
 
-        <a href="{{ route('events.index') }}">
+        <a
+            href="{{ route('events.index') }}"
+            class="btn btn-secondary"
+        >
             Réinitialiser
         </a>
 
     </form>
 
-    <hr>
-
     @if ($events->isEmpty())
 
-        <p>Aucun événement trouvé.</p>
+        <div class="empty-state">
+            <p>Aucun événement trouvé.</p>
+        </div>
 
     @else
 
-        @foreach ($events as $event)
+        <div class="events-grid">
 
-            <div>
+            @foreach ($events as $event)
 
-                <h2>{{ $event->title }}</h2>
+                <article class="event-card">
 
-                <p>
-                    <strong>Catégorie :</strong>
-                    {{ $event->category }}
-                </p>
+                    <span class="category">
+                        {{ $event->category }}
+                    </span>
 
-                <p>
-                    <strong>Lieu :</strong>
-                    {{ $event->location }}
-                </p>
+                    <h2>
+                        {{ $event->title }}
+                    </h2>
 
-                <p>
-                    <strong>Date :</strong>
-                    {{ $event->event_date }}
-                </p>
+                    <p>
+                        <strong>Lieu :</strong>
+                        {{ $event->location }}
+                    </p>
 
-                <p>
-                   <a href="{{ route('events.show', $event) }}">
-                       Voir les détails
-                  </a>
-                </p>
+                    <p>
+                        <strong>Date :</strong>
+                        {{ $event->event_date }}
+                    </p>
 
-            </div>
+                    <a
+                        href="{{ route('events.show', $event) }}"
+                        class="details-link"
+                    >
+                        Voir les détails →
+                    </a>
 
-            <hr>
+                </article>
 
-        @endforeach
+            @endforeach
+
+        </div>
 
     @endif
+
+</main>
 
 </body>
 </html>
