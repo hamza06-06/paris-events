@@ -28,7 +28,7 @@ Application web permettant de rechercher et consulter des événements culturels
 ### 1. Cloner le projet
 
 ```bash
-git clone <URL_DU_REPOSITORY>
+git clone https://github.com/hamza06-06/paris-events.git
 cd paris-events
 ```
 
