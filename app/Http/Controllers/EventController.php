@@ -3,13 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::orderBy('event_date')->get();
+        $query = Event::query();
 
-        return view('events.index', compact('events'));
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->input('search') . '%');
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category', $request->input('category'));
+        }
+
+        $events = $query
+            ->orderBy('event_date')
+            ->get();
+
+        $categories = [
+            'Concert',
+            'Exposition',
+            'Sport',
+            'Théâtre',
+        ];
+
+        return view('events.index', compact('events', 'categories'));
     }
 }

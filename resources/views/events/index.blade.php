@@ -10,19 +10,80 @@
 
     <h1>Paris Events</h1>
 
-    @foreach ($events as $event)
-        <div>
-            <h2>{{ $event->title }}</h2>
+    <form method="GET" action="{{ route('events.index') }}">
 
-            <p>{{ $event->category }}</p>
+        <input
+            type="text"
+            name="search"
+            placeholder="Rechercher un événement..."
+            value="{{ request('search') }}"
+        >
 
-            <p>{{ $event->location }}</p>
+        <select name="category">
 
-            <p>{{ $event->event_date }}</p>
-        </div>
+            <option value="">
+                Toutes les catégories
+            </option>
 
-        <hr>
-    @endforeach
+            @foreach ($categories as $category)
+
+                <option
+                    value="{{ $category }}"
+                    @selected(request('category') === $category)
+                >
+                    {{ $category }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+        <button type="submit">
+            Rechercher
+        </button>
+
+        <a href="{{ route('events.index') }}">
+            Réinitialiser
+        </a>
+
+    </form>
+
+    <hr>
+
+    @if ($events->isEmpty())
+
+        <p>Aucun événement trouvé.</p>
+
+    @else
+
+        @foreach ($events as $event)
+
+            <div>
+
+                <h2>{{ $event->title }}</h2>
+
+                <p>
+                    <strong>Catégorie :</strong>
+                    {{ $event->category }}
+                </p>
+
+                <p>
+                    <strong>Lieu :</strong>
+                    {{ $event->location }}
+                </p>
+
+                <p>
+                    <strong>Date :</strong>
+                    {{ $event->event_date }}
+                </p>
+
+            </div>
+
+            <hr>
+
+        @endforeach
+
+    @endif
 
 </body>
 </html>
