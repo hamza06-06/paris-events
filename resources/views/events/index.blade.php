@@ -92,7 +92,7 @@
 
                     <p>
                         <strong>Date :</strong>
-                        {{ $event->event_date }}
+                        {{ $event->event_date->format('d/m/Y \à H:i') }}
                     </p>
 
                     <a

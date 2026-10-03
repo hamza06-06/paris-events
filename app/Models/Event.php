@@ -15,4 +15,10 @@ class Event extends Model
         'event_date',
         'image_url',
     ];
+    protected function casts(): array
+    {
+        return [
+            'event_date' => 'datetime',
+        ];
+    }
 }
