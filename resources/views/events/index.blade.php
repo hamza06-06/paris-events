@@ -77,6 +77,12 @@
                     {{ $event->event_date }}
                 </p>
 
+                <p>
+                   <a href="{{ route('events.show', $event) }}">
+                       Voir les détails
+                  </a>
+                </p>
+
             </div>
 
             <hr>

@@ -32,4 +32,9 @@ class EventController extends Controller
 
         return view('events.index', compact('events', 'categories'));
     }
+
+    public function show(Event $event)
+    {
+        return view('events.show', compact('event'));
+    }
 }
