@@ -63,7 +63,12 @@
 
     </form>
 
-    @if ($events->isEmpty())
+    @if ($error)
+        <div class="empty-state">
+            <p>{{ $error }}</p>
+        </div>
+    @endif
+    @if (!$error && $events->isEmpty())
 
         <div class="empty-state">
             <p>Aucun événement trouvé.</p>
@@ -96,7 +101,7 @@
                     </p>
 
                     <a
-                        href="{{ route('events.show', $event) }}"
+                        href="{{ route('events.show', $event->id) }}"
                         class="details-link"
                     >
                         Voir les détails →

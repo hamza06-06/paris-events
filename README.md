@@ -2,23 +2,24 @@
 
 Application web permettant de rechercher et consulter des événements culturels et ludiques à Paris.
 
+Les événements sont récupérés dynamiquement depuis l'API Open Data de la Ville de Paris.
+
 ## Fonctionnalités
 
-- Affichage des événements
+- Affichage des événements à venir
 - Recherche par titre
 - Filtrage par catégorie
-- Tri des événements par date
+- Tri chronologique
 - Consultation du détail d'un événement
-- Réinitialisation des filtres
 - Interface responsive
-- Données de démonstration avec Laravel Seeder
+- Gestion des erreurs lors de l'appel API
 
 ## Technologies
 
 - PHP 8.2
 - Laravel 12
 - Blade
-- SQLite
+- API Open Data Paris
 - HTML5
 - CSS3
 - Git
@@ -58,27 +59,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 5. Créer la base SQLite
-
-Sous Windows PowerShell :
-
-```powershell
-New-Item database/database.sqlite -ItemType File -Force
-```
-
-Sous Linux/macOS :
-
-```bash
-touch database/database.sqlite
-```
-
-### 6. Créer les tables et les données de démonstration
-
-```bash
-php artisan migrate --seed
-```
-
-### 7. Lancer l'application
+### 5. Lancer l'application
 
 ```bash
 php artisan serve
@@ -89,6 +70,11 @@ L'application est accessible sur :
 ```text
 http://127.0.0.1:8000
 ```
+
+## API utilisée
+
+Open Data Paris — Que Faire à Paris ?  
+Événements et activités proposés à Paris.
 
 ## Auteur
 
